@@ -300,8 +300,8 @@
         "y": 840,
         "wires": [
             [
-                "fa6b1115d01f6e7b",
-                "7cce1b79bd2f5a07"
+                "7cce1b79bd2f5a07",
+                "fa6b1115d01f6e7b"
             ]
         ]
     },
@@ -364,25 +364,6 @@
         "wires": [
             [
                 "4ab1ea7a29055427"
-            ]
-        ]
-    },
-    {
-        "id": "fa6b1115d01f6e7b",
-        "type": "function",
-        "z": "39218504bb241744",
-        "name": "query insert pokemon_hablidades",
-        "func": "var id = msg.payload.slot + \" - \" + msg.payload.habilidade;\nmsg.topic = \"INSERT INTO POKEMON_HABILIDADES(Id, Id_Pokemon, Id_Habilidade) SELECT '\"+id+\"', (SELECT P.ID FROM POKEMONS P WHERE P.NOME = '\"+msg.payload.pokemon+\"'), (SELECT H.ID FROM HABILIDADES H WHERE H.HABILIDADE = '\"+msg.payload.habilidade+\"')\";\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1840,
-        "y": 880,
-        "wires": [
-            [
-                "61261d685391e13c"
             ]
         ]
     },
@@ -548,6 +529,25 @@
         "wires": [
             [
                 "3e4b3214d2f2780d"
+            ]
+        ]
+    },
+    {
+        "id": "fa6b1115d01f6e7b",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "query insert pokemon_hablidades",
+        "func": "var id = msg.payload.slot + \" - \" + msg.payload.habilidade;\nmsg.topic = \"INSERT INTO POKEMON_HABILIDADES(Id, Id_Pokemon, Id_Habilidade) SELECT '\"+id+\"', (SELECT P.ID FROM POKEMONS P WHERE P.NOME = '\"+msg.payload.pokemon+\"'), (SELECT H.ID FROM HABILIDADES H WHERE H.HABILIDADE = '\"+msg.payload.habilidade+\"')\";\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 880,
+        "wires": [
+            [
+                "61261d685391e13c"
             ]
         ]
     }
