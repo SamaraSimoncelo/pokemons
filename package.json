@@ -2,9 +2,7 @@
     "name": "Pokemons",
     "description": "A Node-RED Project",
     "version": "0.0.1",
-    "dependencies": {
-        "node-red-node-sqlite": "1.0.3"
-    },
+    "dependencies": {},
     "node-red": {
         "settings": {
             "flowFile": "pokemons.json",
