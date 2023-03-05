@@ -1,0 +1,792 @@
+[
+    {
+        "id": "39218504bb241744",
+        "type": "tab",
+        "label": "Pokemons",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b3e9f05c0f4b5b94",
+        "type": "sqlitedb",
+        "db": "pokemons_db",
+        "mode": "RWC"
+    },
+    {
+        "id": "617ad7889618053f",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Pokemons",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE POKEMONS(Id INTEGER PRIMARY KEY AUTOINCREMENT, Nome CHARACTER(100) NOT NULL, Imagem CHARACTER(1000) NULL)",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 680,
+        "wires": [
+            [
+                "4276b048242ac629"
+            ]
+        ]
+    },
+    {
+        "id": "4276b048242ac629",
+        "type": "sqlite",
+        "z": "39218504bb241744",
+        "mydb": "b3e9f05c0f4b5b94",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "pokemons_db",
+        "x": 560,
+        "y": 740,
+        "wires": [
+            [
+                "640655959cffe9e3"
+            ]
+        ]
+    },
+    {
+        "id": "9624f7d3c70cb19f",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Habilidades",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE HABILIDADES(Id INTEGER PRIMARY KEY AUTOINCREMENT, Habilidade CHARACTER(100) NOT NULL )",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 740,
+        "wires": [
+            [
+                "4276b048242ac629"
+            ]
+        ]
+    },
+    {
+        "id": "743104314009a34a",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Pokemon_Habilidades",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE POKEMON_HABILIDADES(Id CHARACTER(100), Id_Pokemon INTEGER, Id_Habilidade INTEGER, PRIMARY KEY (Id, Id_Pokemon, Id_Habilidade), FOREIGN KEY(Id_Pokemon) REFERENCES POKEMONS(ID), FOREIGN KEY(Id_Habilidade) REFERENCES HABILIDADES(ID))",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 800,
+        "wires": [
+            [
+                "4276b048242ac629"
+            ]
+        ]
+    },
+    {
+        "id": "d8f60575984939a1",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Inserts",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 1020,
+        "wires": [
+            [
+                "a5d312d0b6163fe9",
+                "b99eb182f3da1652"
+            ]
+        ]
+    },
+    {
+        "id": "a5d312d0b6163fe9",
+        "type": "http request",
+        "z": "39218504bb241744",
+        "name": "request pokemons",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://pokeapi.co/api/v2/pokemon?limit=100",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 1060,
+        "wires": [
+            [
+                "3ef6139d274a2e59"
+            ]
+        ]
+    },
+    {
+        "id": "3ef6139d274a2e59",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "split nome e url",
+        "func": "for (let i = 0; i < msg.payload.results.length; i++){ \n    var pokemons = {};\n    pokemons.payload = {\n        nome: msg.payload.results[i].name,\n        url: msg.payload.results[i].url\n    } \n    node.send(pokemons);  \n}\nreturn null\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 1060,
+        "wires": [
+            [
+                "afd3e4bfab2d04bd",
+                "71b464a524003b1d"
+            ]
+        ]
+    },
+    {
+        "id": "8fb1c783ec838751",
+        "type": "delay",
+        "z": "39218504bb241744",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 980,
+        "y": 1160,
+        "wires": [
+            [
+                "0ff7d2713c823a8e"
+            ]
+        ]
+    },
+    {
+        "id": "0ff7d2713c823a8e",
+        "type": "http request",
+        "z": "39218504bb241744",
+        "name": "request pokemon_habilidades",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 1160,
+        "wires": [
+            [
+                "d537dcf84023f114"
+            ]
+        ]
+    },
+    {
+        "id": "afd3e4bfab2d04bd",
+        "type": "change",
+        "z": "39218504bb241744",
+        "name": "url habilidades",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload.url",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 1160,
+        "wires": [
+            [
+                "8fb1c783ec838751"
+            ]
+        ]
+    },
+    {
+        "id": "71b464a524003b1d",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "query insert pokemon",
+        "func": "msg.topic = \"INSERT INTO POKEMONS(Nome) VALUES('\"+msg.payload.nome+\"')\"\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1060,
+        "wires": [
+            [
+                "61261d685391e13c"
+            ]
+        ]
+    },
+    {
+        "id": "d537dcf84023f114",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "spli pokemon_habilidades",
+        "func": "for (var i = 0; i < msg.payload.abilities.length; i++){\n    var habilidade = {};\n    if (msg.payload.abilities[i].ability.name != null){\n        habilidade.payload = {\n            pokemon: msg.payload.name,\n            slot: msg.payload.abilities[i].slot,\n            habilidade: msg.payload.abilities[i].ability.name,\n            imagem: msg.payload.sprites.other.dream_world.front_default\n        }\n        node.send(habilidade);\n    }\n}\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 1160,
+        "wires": [
+            [
+                "fa6b1115d01f6e7b",
+                "7cce1b79bd2f5a07"
+            ]
+        ]
+    },
+    {
+        "id": "b99eb182f3da1652",
+        "type": "http request",
+        "z": "39218504bb241744",
+        "name": "request habilidades",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://pokeapi.co/api/v2/ability?limit=100000",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 980,
+        "wires": [
+            [
+                "ae432135653eb62d"
+            ]
+        ]
+    },
+    {
+        "id": "4ab1ea7a29055427",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "query insert hablidades",
+        "func": "msg.topic = \"INSERT INTO HABILIDADES(Habilidade) VALUES('\" + msg.payload.nome + \"')\"\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 980,
+        "wires": [
+            [
+                "61261d685391e13c"
+            ]
+        ]
+    },
+    {
+        "id": "ae432135653eb62d",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "split habilidade",
+        "func": "for (let i = 0; i < msg.payload.results.length; i++){ \n    var pokemons = {};\n    pokemons.payload = {\n        nome: msg.payload.results[i].name\n    } \n    node.send(pokemons);  \n}\nreturn null\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 980,
+        "wires": [
+            [
+                "4ab1ea7a29055427"
+            ]
+        ]
+    },
+    {
+        "id": "fa6b1115d01f6e7b",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "query insert pokemon_hablidades",
+        "func": "var id = msg.payload.slot + \" - \" + msg.payload.habilidade;\nmsg.topic = \"INSERT INTO POKEMON_HABILIDADES(Id, Id_Pokemon, Id_Habilidade) SELECT '\"+id+\"', (SELECT P.ID FROM POKEMONS P WHERE P.NOME = '\"+msg.payload.pokemon+\"'), (SELECT H.ID FROM HABILIDADES H WHERE H.HABILIDADE = '\"+msg.payload.habilidade+\"')\";\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1200,
+        "wires": [
+            [
+                "61261d685391e13c"
+            ]
+        ]
+    },
+    {
+        "id": "640655959cffe9e3",
+        "type": "debug",
+        "z": "39218504bb241744",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "7cce1b79bd2f5a07",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "query update pokemons",
+        "func": "msg.topic = \"UPDATE POKEMONS SET IMAGEM = '\" + msg.payload.imagem + \"' WHERE ID = (SELECT P.ID FROM POKEMONS P WHERE P.NOME = '\" + msg.payload.pokemon +\"')\";\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1830,
+        "y": 1140,
+        "wires": [
+            [
+                "61261d685391e13c"
+            ]
+        ]
+    },
+    {
+        "id": "61261d685391e13c",
+        "type": "sqlite",
+        "z": "39218504bb241744",
+        "mydb": "b3e9f05c0f4b5b94",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "pokemons_db",
+        "x": 2260,
+        "y": 1020,
+        "wires": [
+            [
+                "afd71eab602bb430"
+            ]
+        ]
+    },
+    {
+        "id": "afd71eab602bb430",
+        "type": "debug",
+        "z": "39218504bb241744",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2500,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "802d8227e25f1a8f",
+        "type": "http in",
+        "z": "39218504bb241744",
+        "name": "",
+        "url": "/pokemons",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 1340,
+        "wires": [
+            [
+                "9cbc0ef053887a83"
+            ]
+        ]
+    },
+    {
+        "id": "3e4b3214d2f2780d",
+        "type": "template",
+        "z": "39218504bb241744",
+        "name": "html",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">\n  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>      \n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Pokemons</title>\n  \n  <style>\nbody {\n         background-color: black;\n         font-family: sans-serif; \n         margin: 40px;\n         color: black;\n         }\n         img{\n         width: 150px;\n         height: 150px;\n         padding-top: 20px;\n         }\n         h1{\n         color: white;\n          margin-button: 20px;\n         }\n         h5{\n         text-transform: capitalize;\n         }\n         span{\n         font-weight: bold;\n         }\n    \n</style>\n</head>\n\n<body>\n  <h1>\n    Conheça 100 Pokémons e suas habilidades\n  </h1>\n <div id=\"principal\" class=\"row row-cols-1 row-cols-md-3 g-4\">\n  </div>\n\n<script type=\"text/javascript\">\nfunction getPokemons(){\n var resp = {{{payload}}};\n const respString = JSON.stringify(resp);\n\nresp.map(\n  (dado)=>{\n    let hab = dado.habilidades.replaceAll(',', ' | ')\nlet div = document.createElement('div');\ndiv.classList.add('col');\ndiv.innerHTML = \" <div class='card'><img src='\"+dado.Imagem+\"' class='card-img-top'/><div class='card-body'><h5 class='card-title'><span>Nome:</span> \"+dado.Nome+\"</h5><p class='card-text'><span>Habilidades:</span> \"+hab+\"</p></div>\";\ndocument.getElementById('principal').appendChild(div);\n  }\n)\n};\n\ngetPokemons()\n</script>\n</body>\n\n</html>",
+        "output": "str",
+        "x": 810,
+        "y": 1340,
+        "wires": [
+            [
+                "c3b784274682db97"
+            ]
+        ]
+    },
+    {
+        "id": "54679c9a5249ed0c",
+        "type": "sqlite",
+        "z": "39218504bb241744",
+        "mydb": "b3e9f05c0f4b5b94",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "pokemons_db",
+        "x": 500,
+        "y": 1340,
+        "wires": [
+            [
+                "c2f4f4cc0386cb75"
+            ]
+        ]
+    },
+    {
+        "id": "9cbc0ef053887a83",
+        "type": "function",
+        "z": "39218504bb241744",
+        "name": "select",
+        "func": "msg.topic = \"select p.id, P.nome, p.imagem, group_concat(h.habilidade) as habilidades from POKEMONS P INNER JOIN POKEMON_HABILIDADES PH ON P.ID = PH.ID_POKEMON LEFT JOIN HABILIDADES H ON PH.ID_HABILIDADE = H.ID group by p.nome, p.imagem\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 1340,
+        "wires": [
+            [
+                "54679c9a5249ed0c"
+            ]
+        ]
+    },
+    {
+        "id": "c3b784274682db97",
+        "type": "http response",
+        "z": "39218504bb241744",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 960,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "c2f4f4cc0386cb75",
+        "type": "json",
+        "z": "39218504bb241744",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 670,
+        "y": 1340,
+        "wires": [
+            [
+                "3e4b3214d2f2780d"
+            ]
+        ]
+    },
+    {
+        "id": "cf3345c8e38f2ee1",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Pokemons",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "drop TABLE POKEMONS",
+        "payload": "",
+        "payloadType": "date",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "41bef8405b593ce5"
+            ]
+        ]
+    },
+    {
+        "id": "45a3ae4d27e913cf",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Habilidades",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "drop TABLE HABILIDADES",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "41bef8405b593ce5"
+            ]
+        ]
+    },
+    {
+        "id": "4e0640f4d6981959",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Pokemon_Habilidades",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "drop TABLE POKEMON_HABILIDADES",
+        "payload": "",
+        "payloadType": "date",
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "41bef8405b593ce5"
+            ]
+        ]
+    },
+    {
+        "id": "41bef8405b593ce5",
+        "type": "sqlite",
+        "z": "39218504bb241744",
+        "mydb": "b3e9f05c0f4b5b94",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "pokemons_db",
+        "x": 740,
+        "y": 320,
+        "wires": [
+            [
+                "8f12d9ec20fad161"
+            ]
+        ]
+    },
+    {
+        "id": "8f12d9ec20fad161",
+        "type": "debug",
+        "z": "39218504bb241744",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ef5f378d28f92bf7",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Pokemons",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from pokemons",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1240,
+        "y": 240,
+        "wires": [
+            [
+                "9ba3521a0a9f6b42"
+            ]
+        ]
+    },
+    {
+        "id": "4ac9d773c9795b95",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Habilidades",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from HABILIDADES",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1250,
+        "y": 300,
+        "wires": [
+            [
+                "9ba3521a0a9f6b42"
+            ]
+        ]
+    },
+    {
+        "id": "5d2b32cbd04af556",
+        "type": "inject",
+        "z": "39218504bb241744",
+        "name": "Create table Pokemon_Habilidades",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from  POKEMON_HABILIDADES",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 360,
+        "wires": [
+            [
+                "9ba3521a0a9f6b42"
+            ]
+        ]
+    },
+    {
+        "id": "9ba3521a0a9f6b42",
+        "type": "sqlite",
+        "z": "39218504bb241744",
+        "mydb": "b3e9f05c0f4b5b94",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "pokemons_db",
+        "x": 1600,
+        "y": 300,
+        "wires": [
+            [
+                "bac3a2aeb1d5d0f9"
+            ]
+        ]
+    },
+    {
+        "id": "bac3a2aeb1d5d0f9",
+        "type": "debug",
+        "z": "39218504bb241744",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1820,
+        "y": 300,
+        "wires": []
+    }
+]
