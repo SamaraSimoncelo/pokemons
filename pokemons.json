@@ -34,8 +34,8 @@
         "topic": "CREATE TABLE POKEMONS(Id INTEGER PRIMARY KEY AUTOINCREMENT, Nome CHARACTER(100) NOT NULL, Imagem CHARACTER(1000) NULL)",
         "payload": "",
         "payloadType": "date",
-        "x": 180,
-        "y": 680,
+        "x": 160,
+        "y": 360,
         "wires": [
             [
                 "4276b048242ac629"
@@ -50,8 +50,8 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "pokemons_db",
-        "x": 560,
-        "y": 740,
+        "x": 540,
+        "y": 420,
         "wires": [
             [
                 "640655959cffe9e3"
@@ -79,8 +79,8 @@
         "topic": "CREATE TABLE HABILIDADES(Id INTEGER PRIMARY KEY AUTOINCREMENT, Habilidade CHARACTER(100) NOT NULL )",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 740,
+        "x": 170,
+        "y": 420,
         "wires": [
             [
                 "4276b048242ac629"
@@ -108,8 +108,8 @@
         "topic": "CREATE TABLE POKEMON_HABILIDADES(Id CHARACTER(100), Id_Pokemon INTEGER, Id_Habilidade INTEGER, PRIMARY KEY (Id, Id_Pokemon, Id_Habilidade), FOREIGN KEY(Id_Pokemon) REFERENCES POKEMONS(ID), FOREIGN KEY(Id_Habilidade) REFERENCES HABILIDADES(ID))",
         "payload": "",
         "payloadType": "date",
-        "x": 220,
-        "y": 800,
+        "x": 200,
+        "y": 480,
         "wires": [
             [
                 "4276b048242ac629"
@@ -137,8 +137,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
-        "y": 1020,
+        "x": 110,
+        "y": 700,
         "wires": [
             [
                 "a5d312d0b6163fe9",
@@ -162,8 +162,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 330,
-        "y": 1060,
+        "x": 310,
+        "y": 740,
         "wires": [
             [
                 "3ef6139d274a2e59"
@@ -181,8 +181,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 540,
-        "y": 1060,
+        "x": 520,
+        "y": 740,
         "wires": [
             [
                 "afd3e4bfab2d04bd",
@@ -207,8 +207,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 980,
-        "y": 1160,
+        "x": 960,
+        "y": 840,
         "wires": [
             [
                 "0ff7d2713c823a8e"
@@ -231,8 +231,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1230,
-        "y": 1160,
+        "x": 1210,
+        "y": 840,
         "wires": [
             [
                 "d537dcf84023f114"
@@ -258,8 +258,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 780,
-        "y": 1160,
+        "x": 760,
+        "y": 840,
         "wires": [
             [
                 "8fb1c783ec838751"
@@ -277,8 +277,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 1060,
+        "x": 780,
+        "y": 740,
         "wires": [
             [
                 "61261d685391e13c"
@@ -296,8 +296,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1530,
-        "y": 1160,
+        "x": 1510,
+        "y": 840,
         "wires": [
             [
                 "fa6b1115d01f6e7b",
@@ -321,8 +321,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 330,
-        "y": 980,
+        "x": 310,
+        "y": 660,
         "wires": [
             [
                 "ae432135653eb62d"
@@ -340,8 +340,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 810,
-        "y": 980,
+        "x": 790,
+        "y": 660,
         "wires": [
             [
                 "61261d685391e13c"
@@ -359,8 +359,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 540,
-        "y": 980,
+        "x": 520,
+        "y": 660,
         "wires": [
             [
                 "4ab1ea7a29055427"
@@ -378,8 +378,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1860,
-        "y": 1200,
+        "x": 1840,
+        "y": 880,
         "wires": [
             [
                 "61261d685391e13c"
@@ -398,8 +398,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 740,
+        "x": 780,
+        "y": 420,
         "wires": []
     },
     {
@@ -413,8 +413,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1830,
-        "y": 1140,
+        "x": 1810,
+        "y": 820,
         "wires": [
             [
                 "61261d685391e13c"
@@ -429,8 +429,8 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "pokemons_db",
-        "x": 2260,
-        "y": 1020,
+        "x": 2240,
+        "y": 700,
         "wires": [
             [
                 "afd71eab602bb430"
@@ -449,8 +449,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2500,
-        "y": 1020,
+        "x": 2480,
+        "y": 700,
         "wires": []
     },
     {
@@ -462,8 +462,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 140,
-        "y": 1340,
+        "x": 120,
+        "y": 1020,
         "wires": [
             [
                 "9cbc0ef053887a83"
@@ -481,8 +481,8 @@
         "syntax": "mustache",
         "template": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">\n  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\" crossorigin=\"anonymous\"></script>      \n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Pokemons</title>\n  \n  <style>\nbody {\n         background-color: black;\n         font-family: sans-serif; \n         margin: 40px;\n         color: black;\n         }\n         img{\n         width: 151px;\n         height: 151px;\n         padding-top: 20px;\n         }\n         h1{\n         color: white;\n          margin-button: 20px;\n         }\n         h5{\n         text-transform: capitalize;\n         }\n         span{\n         font-weight: bold;\n         }\n    \n</style>\n</head>\n\n<body>\n  <h1>\n    Conheça 100 Pokémons e suas habilidades\n  </h1>\n <div id=\"principal\" class=\"row row-cols-1 row-cols-md-3 g-4\">\n  </div>\n\n<script type=\"text/javascript\">\nfunction getPokemons(){\n var resp = {{{payload}}};\n const respString = JSON.stringify(resp);\n\nresp.map(\n  (dado)=>{\n    let hab = dado.habilidades.replaceAll(',', ' | ')\nlet div = document.createElement('div');\ndiv.classList.add('col');\ndiv.innerHTML = \" <div class='card'><img src='\"+dado.Imagem+\"' class='card-img-top'/><div class='card-body'><h5 class='card-title'><span>Nome:</span> \"+dado.Nome+\"</h5><p class='card-text'><span>Habilidades:</span> \"+hab+\"</p></div>\";\ndocument.getElementById('principal').appendChild(div);\n  }\n)\n};\n\ngetPokemons()\n</script>\n</body>\n\n</html>",
         "output": "str",
-        "x": 810,
-        "y": 1340,
+        "x": 790,
+        "y": 1020,
         "wires": [
             [
                 "c3b784274682db97"
@@ -497,8 +497,8 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "pokemons_db",
-        "x": 500,
-        "y": 1340,
+        "x": 480,
+        "y": 1020,
         "wires": [
             [
                 "c2f4f4cc0386cb75"
@@ -516,8 +516,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 1340,
+        "x": 290,
+        "y": 1020,
         "wires": [
             [
                 "54679c9a5249ed0c"
@@ -531,8 +531,8 @@
         "name": "Response",
         "statusCode": "",
         "headers": {},
-        "x": 960,
-        "y": 1340,
+        "x": 940,
+        "y": 1020,
         "wires": []
     },
     {
@@ -543,131 +543,12 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 670,
-        "y": 1340,
+        "x": 650,
+        "y": 1020,
         "wires": [
             [
                 "3e4b3214d2f2780d"
             ]
         ]
-    },
-    {
-        "id": "cf3345c8e38f2ee1",
-        "type": "inject",
-        "z": "39218504bb241744",
-        "name": "Create table Pokemons",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "drop TABLE POKEMONS",
-        "payload": "",
-        "payloadType": "date",
-        "x": 380,
-        "y": 260,
-        "wires": [
-            [
-                "41bef8405b593ce5"
-            ]
-        ]
-    },
-    {
-        "id": "45a3ae4d27e913cf",
-        "type": "inject",
-        "z": "39218504bb241744",
-        "name": "Create table Habilidades",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "drop TABLE HABILIDADES",
-        "payload": "",
-        "payloadType": "date",
-        "x": 390,
-        "y": 320,
-        "wires": [
-            [
-                "41bef8405b593ce5"
-            ]
-        ]
-    },
-    {
-        "id": "4e0640f4d6981959",
-        "type": "inject",
-        "z": "39218504bb241744",
-        "name": "Create table Pokemon_Habilidades",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "drop TABLE POKEMON_HABILIDADES",
-        "payload": "",
-        "payloadType": "date",
-        "x": 420,
-        "y": 380,
-        "wires": [
-            [
-                "41bef8405b593ce5"
-            ]
-        ]
-    },
-    {
-        "id": "41bef8405b593ce5",
-        "type": "sqlite",
-        "z": "39218504bb241744",
-        "mydb": "b3e9f05c0f4b5b94",
-        "sqlquery": "msg.topic",
-        "sql": "",
-        "name": "pokemons_db",
-        "x": 740,
-        "y": 320,
-        "wires": [
-            [
-                "8f12d9ec20fad161"
-            ]
-        ]
-    },
-    {
-        "id": "8f12d9ec20fad161",
-        "type": "debug",
-        "z": "39218504bb241744",
-        "name": "debug 7",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 960,
-        "y": 320,
-        "wires": []
     }
 ]
